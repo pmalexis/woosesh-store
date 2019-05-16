@@ -39,6 +39,35 @@ export default class App extends React.Component {
     });
   }
 
+  onAddOnceItem = (item) => {
+    this.setState(state => {
+      var exists = false;
+      const newState = state.items.map(currentItem => {
+        if (currentItem.id === item.id) {
+          exists = true;
+          return {
+            ...currentItem,
+            quantity: currentItem.quantity + 1
+          }
+        } else {
+          return currentItem
+        }
+      });
+      if(exists) {
+        return {
+          items: newState
+        }
+      } else {
+        return {
+          items: [
+            ...state.items,
+            item
+          ]
+        }
+      }
+    });
+  }
+
   onRemoveItem = (item) => {
     this.setState(state => {
       const remainingItems = [
@@ -46,6 +75,49 @@ export default class App extends React.Component {
       ]
       return {
         items: remainingItems
+      }
+    });
+  }
+
+  onRemoveOnceItem = (item) => {
+    this.setState(state => {
+      var del = false;
+      var exists = false;
+      const newState = state.items.map(currentItem => {
+        if (currentItem.id === item.id) {
+          exists = true;
+          return {
+            ...currentItem,
+            quantity: currentItem.quantity - 1
+          }
+        } else {
+          return currentItem
+        }
+        if(currentItem.quantity <= 0) {
+          del = true;
+        }
+      });
+
+      if(del) {
+        const remainingItems = [
+          ...state.items.filter(i => i.id !== item.id)
+        ]
+        return {
+          items: remainingItems
+        }
+      }
+      
+      if(exists) {
+        return {
+          items: newState
+        }
+      } else {
+        return {
+          items: [
+            ...state.items,
+            item
+          ]
+        }
       }
     });
   }
@@ -65,7 +137,9 @@ export default class App extends React.Component {
           value={{
             items: this.state.items,
             addItem: this.onAddItem,
+            addOnceItem: this.onAddOnceItem,
             removeItem: this.onRemoveItem,
+            removeOnceItem: this.onRemoveOnceItem
           }}
         >
           <View style={styles.container}>
@@ -99,6 +173,6 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FAFAFA',
   },
 });

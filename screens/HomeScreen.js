@@ -8,6 +8,10 @@ import {
   View,
 } from 'react-native';
 
+import { Dimensions } from "react-native";
+let width = Dimensions.get('window').width;
+let height = Dimensions.get('window').height;
+
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
@@ -16,7 +20,7 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <ScrollView style={styles.containerSV} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
             <Image
               source={
@@ -26,21 +30,26 @@ export default class HomeScreen extends React.Component {
             />
           </View>
 
-          <View style={styles.getStartedContainer}>
-            <Text style={styles.title}>WooSesh Store</Text>
-          </View>
           <ScrollView
             horizontal
             pagingEnabled
-            style={{ marginBottom: 10 }}
+            style={{ marginTop: 30, marginBottom: 10 }}
           >
-            <Image source={{ uri: 'https://woocommerce-store.on-its-way.com/wp-content/uploads/2018/02/tshirt.jpg' }} style={styles.sliderImage} />
-            <Image source={{ uri: 'https://woocommerce-store.on-its-way.com/wp-content/uploads/2018/02/polo.jpg' }} style={styles.sliderImage} />
-            <Image source={{ uri: 'https://woocommerce-store.on-its-way.com/wp-content/uploads/2018/02/cap.jpg' }} style={styles.sliderImage} />
-            <Image source={{ uri: 'https://woocommerce-store.on-its-way.com/wp-content/uploads/2018/02/sunglasses.jpg' }} style={styles.sliderImage} />
+            <Image source={ require('../assets/home/photo-1.png') } style={styles.sliderImage} />
+            <Image source={ require('../assets/home/photo-2.png') } style={styles.sliderImage} />
+            <Image source={ require('../assets/home/photo-3.png') } style={styles.sliderImage} />
           </ScrollView>
-          <Button color="#05a5d1" title="SHOP" onPress={() => this.props.navigation.navigate("Products")} />
         </ScrollView>
+
+        <View style={styles.contentObject}>
+          <Image
+            source={
+              require('../assets/home/obj-1.png')
+            }
+            style={styles.object}
+          />
+        </View>
+
       </View>
     );
   }
@@ -49,36 +58,43 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f6f6f6',
+    backgroundColor: '#FAFAFA',
   },
-  title: {
-    fontSize: 22,
-    paddingBottom: 10
+  containerSV: {
+    position: 'relative',
+    zIndex: 1,
+    flex: 1,
   },
   contentContainer: {
     paddingTop: 30,
   },
   welcomeContainer: {
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 15,
     marginBottom: 20,
   },
   welcomeImage: {
-    width: 100,
-    height: 80,
+    width: 50,
+    height: 50,
     resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
-  },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
   },
   helpLink: {
     paddingVertical: 15,
   },
   sliderImage: {
-    height: 360,
-    width: 360
-  }
+    height: 420,
+    width: 360,
+    resizeMode: 'contain',
+  },
+  contentObject: {
+    position: 'absolute',
+    zIndex: 0,
+    right: 0,
+    bottom: -75,
+  },
+  object : {
+    height: height,
+    width: width,
+    resizeMode: 'contain',
+  },
 });
