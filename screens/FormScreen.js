@@ -10,6 +10,8 @@ import {
 
 } from 'react-native';
 
+import { Dimensions } from "react-native";
+let height = Dimensions.get('window').height;
 
 export default class FormScreen extends React.Component {
   static navigationOptions = {
@@ -31,21 +33,15 @@ export default class FormScreen extends React.Component {
 
           <View style={styles.getStartedContainer}>
             <Text style={styles.title}>Log in or sign up for free</Text>
-          
-         
-          
-       <TouchableOpacity
-         style={styles.button} onPress={() => this.props.navigation.navigate("Login")}>
-         <Text style={styles.boutoncouleur}> Log in </Text>
-       </TouchableOpacity>
-       <TouchableOpacity
-         style={styles.button} onPress={() => this.props.navigation.navigate("Signup")}>
-         <Text style={styles.boutoncouleur}> Sign up </Text>
-       </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("Login")}>
+              <Text style={styles.boutoncouleur}> Log in </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("Signup")}>
+              <Text style={styles.boutoncouleur}> Sign up </Text>
+            </TouchableOpacity>
           </View>
 
-          
-          </ScrollView>
+        </ScrollView>
       </View>
     );
   }
@@ -55,6 +51,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#5F1F6D',
+    height: height,
   },
   title: {
     fontSize: 20,
@@ -71,21 +68,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
     marginBottom: 20,
+    height: height,
   },
   welcomeImage: {
     width: 350,
     height: 200,
     resizeMode: 'contain',
     marginTop: 40,
-    
   },
   getStartedContainer: {
+    position: 'absolute',
+    left: 0,
+    bottom: 100,
     alignItems: 'center',
     paddingTop: 20,
+    paddingBottom: 50,
     backgroundColor: '#ffffff',
-    height: '100%',
     width: '100%',
-    marginTop: 100,
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
   },
