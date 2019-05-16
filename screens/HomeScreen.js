@@ -35,16 +35,16 @@ export default class HomeScreen extends React.Component {
             pagingEnabled
             style={{ marginTop: 30, marginBottom: 10 }}
           >
-            <Image source={ require('../assets/home/photo-1.png') } style={styles.sliderImage} />
-            <Image source={ require('../assets/home/photo-2.png') } style={styles.sliderImage} />
-            <Image source={ require('../assets/home/photo-3.png') } style={styles.sliderImage} />
+            <Image source={ require('../assets/images/photo-1.png') } style={styles.sliderImage} />
+            <Image source={ require('../assets/images/photo-2.png') } style={styles.sliderImage} />
+            <Image source={ require('../assets/images/photo-3.png') } style={styles.sliderImage} />
           </ScrollView>
         </ScrollView>
 
         <View style={styles.contentObject}>
           <Image
             source={
-              require('../assets/home/obj-1.png')
+              require('../assets/images/obj-1.png')
             }
             style={styles.object}
           />
