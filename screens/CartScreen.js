@@ -15,6 +15,23 @@ export default class CartScreen extends React.Component {
     header: null,
   };
 
+  state = {
+    total: 0,
+  };
+
+  Up = (item) => {
+    this.setState({ total: Number(this.state.total) + Number(item.price) });
+  }
+
+  Add = (cart, item) => {
+    cart.addOnceItem(item);
+  }
+
+  Remove = (cart, item) => {
+    cart.removeOnceItem(item);
+    this.setState({ total: Number(this.state.total) - (Number(item.price)*2) });
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -35,24 +52,13 @@ export default class CartScreen extends React.Component {
           <CartContext.Consumer>
             {cart => {
               if (cart.items && cart.items.length > 0) {
-                const Total = 0;
                 const Items = <FlatList contentContainerStyle={styles.list}
                   data={cart.items}
                   keyExtractor={ item => item.id.toString() }
-                  Total={Total + 2}
                   renderItem={({ item }) =>
                     <View style={styles.lineItem} >
                       <Image style={styles.image} source={{ uri: item.image }} />
-                      <TouchableOpacity style={{ marginLeft: 5, marginRight: 5 }} onPress={() => cart.addOnceItem(item)}>
-                        <Icon.Ionicons
-                          name={'ios-add-circle-outline'}
-                          size={26}
-                          style={{ marginBottom: 0 }}
-                          color={Colors.tabIconDefault}
-                        />
-                      </TouchableOpacity>
-                      <Text style={styles.numberText}>{item.quantity}</Text>
-                      <TouchableOpacity style={{ marginLeft: 5, marginRight: 5 }} onPress={() => cart.removeOnceItem(item)}>
+                      <TouchableOpacity style={{ marginLeft: 5, marginRight: 5 }} onPress={() => this.Remove(cart, item)}>
                         <Icon.Ionicons
                           name={'ios-remove-circle-outline'}
                           size={26}
@@ -60,8 +66,20 @@ export default class CartScreen extends React.Component {
                           color={Colors.tabIconDefault}
                         />
                       </TouchableOpacity>
+                      <Text style={styles.numberText}>{item.quantity}</Text>
+                      <TouchableOpacity style={{ marginLeft: 5, marginRight: 5 }} onPress={() => this.Add(cart, item) }>
+                        <Icon.Ionicons
+                          name={'ios-add-circle-outline'}
+                          size={26}
+                          style={{ marginBottom: 0 }}
+                          color={Colors.tabIconDefault}
+                        />
+                      </TouchableOpacity>
                       <Text style={styles.nameText}>{item.name}</Text>
-                      <Text style={styles.priceText}>${item.price}</Text>
+                      <Text style={styles.priceText}>
+                        ${item.price}/u
+                        {this.Up(item)}
+                      </Text>
                     </View>
                   }
                 />;
@@ -72,7 +90,7 @@ export default class CartScreen extends React.Component {
                     </View>
                     <View style={styles.rowTotal}>
                       <Text style={styles.rowTotalText}>Total</Text>
-                      <Text style={styles.rowTotalNumber}>{Total}</Text>
+                      <Text style={styles.rowTotalNumber}>{this.state.total}</Text>
                     </View>
                   </View>
                 )
@@ -149,6 +167,20 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     paddingRight: 15,
     fontSize: 50,
+  },
+  rowTotal: {
+    marginTop: 10,
+    paddingRight: 15,
+    paddingLeft: 15,
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+  },
+  rowTotalText: {
+    fontSize: 35,
+  },
+  rowTotalNumber: {
+    fontSize: 20,
   },
   empty: {
     marginTop: 30,

@@ -4,6 +4,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
+import CategoriesScreen from '../screens/CategoriesScreen';
 import ProductsScreen from '../screens/ProductsScreen';
 import SingleProductScreen from '../screens/SingleProductScreen';
 import CartScreen from '../screens/CartScreen';
@@ -41,12 +42,13 @@ HomeStack.navigationOptions = {
   barTintColor: '#000',
 };
 
-const ProductsStack = createStackNavigator({
+const categoriesStack = createStackNavigator({
+  Categories: CategoriesScreen,
   Products: ProductsScreen,
   SingleProduct: SingleProductScreen,
 });
 
-ProductsStack.navigationOptions = {
+categoriesStack.navigationOptions = {
   tabBarLabel: 'Brands',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -90,7 +92,6 @@ ProfilStack.navigationOptions = {
 
 const FormStack = createStackNavigator({
   Form: FormScreen,
-  SingleProduct: SingleProductScreen,
 });
 
 FormStack.navigationOptions = {
@@ -106,7 +107,7 @@ FormStack.navigationOptions = {
 export default createBottomTabNavigator({
   FormStack,
   HomeStack,
-  ProductsStack,
+  categoriesStack,
   CartStack,
   ProfilStack
 },

@@ -4,20 +4,19 @@ import axios from 'axios';
 
 import WooApi from '../constants/Api';
 
-export default class ProductsScreen extends React.Component {
+export default class CategoriesScreen extends React.Component {
   static navigationOptions = {
-    title: 'Products',
+    title: 'Brands',
   };
 
   state = {
-    products: []
+    categories: []
   }
 
   fetProducts = () => {
-    const category = this.props.navigation.state.params.categories;
-    const url = `${WooApi.url.wc}products?category=${category}&per_page=20&consumer_key=${WooApi.keys.consumerKey}&consumer_secret=${WooApi.keys.consumerSecret}`;
+    const url = `${WooApi.url.wc}products/categories?per_page=20&consumer_key=${WooApi.keys.consumerKey}&consumer_secret=${WooApi.keys.consumerSecret}`;
     axios.get(url)
-    .then(response => this.setState({ products: response.data }))
+    .then(response => this.setState({ categories: response.data }))
     .catch(error => console.log('error',error));
   }
   
@@ -28,12 +27,11 @@ export default class ProductsScreen extends React.Component {
   renderItem = ({item}) => (
     <TouchableOpacity 
       style={styles.listItem} 
-      onPress={() => this.props.navigation.navigate("SingleProduct", { product: item })}
+      onPress={() => this.props.navigation.navigate("Products", { categories: item.id })}
     >
       <View style={styles.view}>
-        <Image style={styles.image} source={{ uri: item.images[0].src }} />
-        <Text style={styles.text}>{item.name}</Text>
-      </View>
+        <Image style={styles.image} source={{uri: item.image.src}} />
+       </View>
     </TouchableOpacity>
   )
 
@@ -41,11 +39,11 @@ export default class ProductsScreen extends React.Component {
     return (
       <ScrollView style={styles.container}>
         {
-          this.state.products.length ?
+          this.state.categories.length ?
           <FlatList
             contentContainerStyle={styles.list} 
             numColumns={2}
-            data={this.state.products}
+            data={this.state.categories}
             keyExtractor={ item => item.id.toString() }
             renderItem={this.renderItem}
           />
@@ -79,7 +77,8 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 150, 
-    height: 150
+    height: 150,
+    resizeMode: 'contain',
   },
   text: {
     textAlign: 'center',
