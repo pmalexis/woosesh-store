@@ -15,6 +15,9 @@ import SignupScreen from '../screens/SignupScreen';
 
 const HomeStack = createStackNavigator(
    {
+    Form: {
+      screen: FormScreen
+    },
     Home: {
       screen: HomeScreen,
     },
@@ -105,7 +108,6 @@ FormStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-  FormStack,
   HomeStack,
   categoriesStack,
   CartStack,

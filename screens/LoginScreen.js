@@ -19,7 +19,7 @@ export default class LoginScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <View style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
             <Image
               source={
@@ -29,54 +29,38 @@ export default class LoginScreen extends React.Component {
             />
           </View>
           <TouchableOpacity onPress={() => this.props.navigation.navigate('Form')}>
-                <Image 
+            <Image 
               source={
                 require('../assets/images/retour.png')
               } 
               style={styles.retour}
             />
-            </TouchableOpacity>
+          </TouchableOpacity>
           <View style={styles.getStartedContainer}>
             <Text style={styles.titlelogin}>Log in</Text>
-         
-                
-      
-
-        <TextInput
-          
-          // Adding hint in Text Input using Place holder.
-          placeholder="Email address"
- 
-          // Making the Under line Transparent.
-          underlineColorAndroid='transparent'
- 
-          style={styles.TextInputStyle}
- 
-        />
-        <TextInput
-          
-          // Adding hint in Text Input using Place holder.
-          placeholder="Password"
- 
-          // Making the Under line Transparent.
-          underlineColorAndroid='transparent'
- 
-          style={styles.TextInputStyle}
- 
-          // Making the Text Input Text Hidden.
-          secureTextEntry={true}
- 
-        />
-        <TouchableOpacity
-         style={styles.button} onPress={() => this.props.navigation.navigate('Home')}>
-         <Text style={styles.boutoncouleur}> Log in </Text>
-       </TouchableOpacity>
-       <Text style={styles.forgotpassword}>Forgot your password ?</Text>
-        
+            <TextInput
+              // Adding hint in Text Input using Place holder.
+              placeholder="Email address"
+              // Making the Under line Transparent.
+              underlineColorAndroid='transparent'
+              style={styles.TextInputStyle}
+            />
+            <TextInput
+              // Adding hint in Text Input using Place holder.
+              placeholder="Password"
+              // Making the Under line Transparent.
+              underlineColorAndroid='transparent'
+              style={styles.TextInputStyle}
+              // Making the Text Input Text Hidden.
+              secureTextEntry={true}
+            />
+            <TouchableOpacity
+              style={styles.button} onPress={() => this.props.navigation.navigate('Home')}>
+              <Text style={styles.boutoncouleur}> Log in </Text>
+            </TouchableOpacity>
+            <Text style={styles.forgotpassword}>Forgot your password ?</Text>
           </View>
-
-          
-          </ScrollView>
+        </View>
       </View>
     );
   }

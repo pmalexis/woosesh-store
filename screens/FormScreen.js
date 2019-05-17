@@ -21,7 +21,7 @@ export default class FormScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <View style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
             <Image
               source={
@@ -41,7 +41,7 @@ export default class FormScreen extends React.Component {
             </TouchableOpacity>
           </View>
 
-        </ScrollView>
+        </View>
       </View>
     );
   }
@@ -74,12 +74,12 @@ const styles = StyleSheet.create({
     width: 350,
     height: 200,
     resizeMode: 'contain',
-    marginTop: 40,
+    marginTop: 70,
   },
   getStartedContainer: {
     position: 'absolute',
     left: 0,
-    bottom: 100,
+    bottom: 0,
     alignItems: 'center',
     paddingTop: 20,
     paddingBottom: 50,

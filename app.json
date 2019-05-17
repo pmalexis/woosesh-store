@@ -2,6 +2,8 @@
   "expo": {
     "name": "woosesh-store",
     "description": "A very interesting project.",
+    "version": "1.0.0",
+    "sdkVersion": "42.0.0",
     "slug": "woosesh-store",
     "privacy": "public",
     "sdkVersion": "30.0.0",
@@ -20,8 +22,8 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
+    "android": {
+      "package": "com.mynetsale.mynetsale"
     }
   }
 }
