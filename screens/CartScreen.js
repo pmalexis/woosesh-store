@@ -83,6 +83,7 @@ export default class CartScreen extends React.Component {
                     </View>
                   }
                 />;
+
                 return (
                   <View>
                     <View style={styles.items}>
@@ -92,6 +93,9 @@ export default class CartScreen extends React.Component {
                       <Text style={styles.rowTotalText}>Total</Text>
                       <Text style={styles.rowTotalNumber}>{this.state.total}</Text>
                     </View>
+                  <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('')}>
+                      <Text style={styles.boutoncouleur}> pay in one clic </Text>
+                  </TouchableOpacity>
                   </View>
                 )
               } else {
@@ -102,8 +106,11 @@ export default class CartScreen extends React.Component {
                 )
               }
             }}
+
           </CartContext.Consumer>
+
         </ScrollView>
+        
       </View> 
     );
   }
@@ -185,5 +192,20 @@ const styles = StyleSheet.create({
   empty: {
     marginTop: 30,
     fontSize: 30,
-  }
+  },
+  button: {
+    backgroundColor: '#5F1F6D',
+    width: 350,
+    height: 50,
+    left: '8%',
+    top: 250,
+
+  },
+  boutoncouleur: {
+    color: "#a5a5a5",
+    textAlign: 'center',
+    marginTop: 15,
+    fontSize: 18,
+
+  },
 });
