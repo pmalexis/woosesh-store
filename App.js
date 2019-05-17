@@ -86,15 +86,17 @@ export default class App extends React.Component {
       const newState = state.items.map(currentItem => {
         if (currentItem.id === item.id) {
           exists = true;
-          return {
-            ...currentItem,
-            quantity: currentItem.quantity - 1
+          if(currentItem.quantity - 1 == 0) {
+            del = true;
+          }
+          else {
+            return {
+              ...currentItem,
+              quantity: currentItem.quantity - 1
+            }
           }
         } else {
           return currentItem
-        }
-        if(currentItem.quantity <= 0) {
-          del = true;
         }
       });
 
@@ -106,7 +108,7 @@ export default class App extends React.Component {
           items: remainingItems
         }
       }
-      
+
       if(exists) {
         return {
           items: newState

@@ -35,38 +35,45 @@ export default class CartScreen extends React.Component {
           <CartContext.Consumer>
             {cart => {
               if (cart.items && cart.items.length > 0) {
+                const Total = 0;
                 const Items = <FlatList contentContainerStyle={styles.list}
                   data={cart.items}
                   keyExtractor={ item => item.id.toString() }
+                  Total={Total + 2}
                   renderItem={({ item }) =>
                     <View style={styles.lineItem} >
                       <Image style={styles.image} source={{ uri: item.image }} />
-                      <TouchableOpacity style={{ marginLeft: 10, marginRight: 10 }} onPress={() => cart.addOnceItem(item)}>
+                      <TouchableOpacity style={{ marginLeft: 5, marginRight: 5 }} onPress={() => cart.addOnceItem(item)}>
                         <Icon.Ionicons
                           name={'ios-add-circle-outline'}
                           size={26}
-                          style={{ marginBottom: -10 }}
+                          style={{ marginBottom: 0 }}
                           color={Colors.tabIconDefault}
                         />
                       </TouchableOpacity>
-                      <Text style={styles.text}>{item.quantity}</Text>
-                      <TouchableOpacity style={{ marginLeft: 10, marginRight: 10 }} onPress={() => cart.removeOnceItem(item)}>
+                      <Text style={styles.numberText}>{item.quantity}</Text>
+                      <TouchableOpacity style={{ marginLeft: 5, marginRight: 5 }} onPress={() => cart.removeOnceItem(item)}>
                         <Icon.Ionicons
                           name={'ios-remove-circle-outline'}
                           size={26}
-                          style={{ marginBottom: -10 }}
+                          style={{ marginBottom: 0 }}
                           color={Colors.tabIconDefault}
                         />
                       </TouchableOpacity>
-                      <Text style={styles.text}>{item.name}</Text>
-                      <Text style={styles.text}>{item.quantity} x ${item.price}</Text>
-                      <TouchableOpacity style={{ marginLeft: 'auto' }} onPress={() => cart.removeItem(item)}><Entypo name="cross" size={30} /></TouchableOpacity>
+                      <Text style={styles.nameText}>{item.name}</Text>
+                      <Text style={styles.priceText}>${item.price}</Text>
                     </View>
                   }
                 />;
                 return (
-                  <View style={styles.items}>
-                    {Items}
+                  <View>
+                    <View style={styles.items}>
+                      {Items}
+                    </View>
+                    <View style={styles.rowTotal}>
+                      <Text style={styles.rowTotalText}>Total</Text>
+                      <Text style={styles.rowTotalNumber}>{Total}</Text>
+                    </View>
                   </View>
                 )
               } else {
@@ -97,8 +104,8 @@ const styles = StyleSheet.create({
     paddingRight: 15,
   },
   image: {
-    width: 100,
-    height: 100
+    width: 75,
+    height: 75,
   },
   container: {
     flex: 1,
@@ -107,9 +114,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: width,
   },
-  text: {
+  nameText: {
+    fontSize: 15,
+    marginLeft: 10,
+    width: 80,
+  },
+  priceText: {
+    position: 'absolute',
+    right: 5,
+    fontSize: 15,
+  },
+  numberText: {
     fontSize: 20,
-    padding: 5
+    marginRight: 5,
+    marginLeft: 5,
   },
   welcomeContainer: {
     alignItems: 'center',
